@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>i love my gf</title>
+  <!-- beautiful serif font & clean sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Quicksand', 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at 30% 40%, #2b4b6f, #1a2f40);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* floating stickers (only background, subtle) */
+    .sticker {
+      position: absolute;
+      font-size: 2.2rem;
+      opacity: 0.45;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
+      animation: drift 8s infinite alternate ease-in-out;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes drift {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-18px) rotate(4deg); }
+    }
+
+    .s1 { top: 8%; left: 7%; animation-duration: 9s; }
+    .s2 { top: 16%; right: 9%; animation-duration: 10s; animation-delay: -2s; }
+    .s3 { bottom: 10%; left: 12%; animation-duration: 8s; animation-delay: -1s; }
+    .s4 { bottom: 13%; right: 10%; animation-duration: 9.5s; }
+
+    /* main card – refined glassmorphism */
+    .card {
+      width: 420px;
+      padding: 32px 24px 38px;
+      border-radius: 56px 56px 56px 56px;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 245, 240, 0.2) inset;
+      text-align: center;
+      position: relative;
+      z-index: 15;
+      border: 1px solid rgba(255, 240, 230, 0.25);
+    }
+
+    /* --- main title: beautiful stationary font (Playfair) --- */
+    .elegant-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 2.3rem;
+      line-height: 1.2;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #ffe8df, #ffcfc0, #fde2c4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(255, 190, 200, 0.6), 2px 4px 12px rgba(80, 40, 50, 0.3);
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      /* NO floating animation — completely steady */
+      transform: none;
+      animation: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+    }
+
+    /* each word inline with a tiny static flower accent */
+    .elegant-title span {
+      display: inline-block;
+      white-space: nowrap;
+      margin: 0 4px;
+    }
+
+    /* message box */
+    .messageBox {
+      background: rgba(255, 250, 245, 0.9);
+      backdrop-filter: blur(4px);
+      border-radius: 44px 44px 34px 34px;
+      padding: 24px 20px 20px;
+      margin-top: 12px;
+      color: #4a2e28;
+      box-shadow: 0 12px 18px -8px rgba(50, 25, 25, 0.3);
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      color: #6d3f4b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 6px rgba(255, 220, 210, 0.5);
+    }
+
+    /* letter – smooth open */
+    .letter {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.9s cubic-bezier(0.33, 1, 0.68, 1);
+      font-size: 0.8 rem;
+      line-height: 1.7;
+      color: #3b2c27;
+      padding: 0 6px;
+      margin: 12px 0 4px;
+      text-align: left;
+      font-weight: 400;
+      background: rgba(255, 240, 235, 0.5);
+      border-radius: 28px;
+    }
+
+    .card.open .letter {
+      max-height: 330px;
+      padding: 18px 14px;
+      background: rgba(255, 245, 240, 0.85);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+    }
+
+    /* heart button */
+    .openBtn {
+      margin-top: 20px;
+      font-size: 48px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s, filter 0.2s;
+      filter: drop-shadow(0 6px 12px #cc9faa);
+      line-height: 1;
+      padding: 0 6px;
+      color: #ffe4e1;
+    }
+
+    .openBtn:hover {
+      transform: scale(1.25) rotate(2deg);
+      filter: drop-shadow(0 12px 18px #e6a6bb);
+    }
+
+    /* touch flowers – still playful */
+    .touchFlower {
+      position: absolute;
+      font-size: 2.6rem;
+      pointer-events: none;
+      z-index: 999;
+      filter: drop-shadow(0 8px 14px rgba(245, 150, 180, 0.6));
+      animation: petalFloat 2.1s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-origin: center;
+    }
+
+    @keyframes petalFloat {
+      0% { opacity: 1; transform: scale(0.4) translateY(0) rotate(0deg); }
+      40% { opacity: 0.9; transform: scale(1.2) translateY(-35px) rotate(15deg); }
+      80% { opacity: 0.35; transform: scale(1.6) translateY(-85px) rotate(5deg); }
+      100% { opacity: 0; transform: scale(2) translateY(-130px) rotate(20deg); }
+    }
+
+    /* responsive */
+    @media (max-width: 460px) {
+      .card { width: 340px; padding: 24px 18px; }
+      .elegant-title { font-size: 1.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- floating background stickers (still drift, but they are far in background) -->
+  <div class="sticker s1">🌸</div>
+  <div class="sticker s2">💗</div>
+  <div class="sticker s3">🌷</div>
+  <div class="sticker s4">✨</div>
+  <div class="sticker" style="top:70%; left:85%;">🌙</div>
+  <div class="sticker" style="top:82%; left:6%;">🪷</div>
+
+  <!-- main card -->
+  <div class="card" id="card">
+    <!-- beautiful, stationary title with Playfair font – no floating animation -->
+    <div class="elegant-title">
+      <span>International</span> 
+      <span>women's</span> 
+      <span>day</span>
+    </div>
+    <div class="messageBox">
+      <div class="title"> I love you 🤍</div>
+
+      <div class="letter">
+        <p>
+Today is about celebrating strong and beautiful women, and for me, You are the most special woman to me. Thank you for your kindness, your smile, and for making my life brighter. I’m lucky to have you. You deserve love and happiness every day. I’m proud of you and lucky to call you mine. 🤍🤍<br><br>
+<br>
+<span style="display:inline-block; margin-top:8px;">Love from Pineapple :3 </span>
+        </p>
+      </div>
+
+      <button class="openBtn" id="heartButton" aria-label="open message">🤍</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const card = document.getElementById('card');
+      const heartBtn = document.getElementById('heartButton');
+
+      function toggleLetter(e) {
+        e?.stopPropagation();
+        card.classList.toggle('open');
+        if (card.classList.contains('open')) {
+          heartBtn.style.transform = 'scale(1.2)';
+          heartBtn.innerText = '👉🤍👈';
+          setTimeout(() => {
+            heartBtn.style.transform = '';
+          }, 200);
+        } else {
+          heartBtn.innerText = '👉🤍👈';
+        }
+      }
+
+      heartBtn.addEventListener('click', toggleLetter);
+      window.toggleLetter = toggleLetter;
+
+      // tap flower animation (still delightful)
+      document.addEventListener('click', function(e) {
+        const flowers = ['🌸', '🌺', '🌷', '💮', '🪷', '🌼'];
+        const sticker = document.createElement('div');
+        sticker.className = 'touchFlower';
+        sticker.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+        sticker.style.left = (e.clientX - 20) + 'px';
+        sticker.style.top = (e.clientY - 20) + 'px';
+        document.body.appendChild(sticker);
+
+        setTimeout(() => {
+          if (sticker.parentNode) sticker.remove();
+        }, 2100);
+      });
+
+      heartBtn.innerText = '👉🤍👈';
+      heartBtn.removeAttribute('onclick');
+    })();
+  </script>
+</body>
+</html>
